@@ -300,7 +300,7 @@ main {
     margin: 0 0 0.3rem 0;
 }
 .descripcion-gasto .categoria {
-    color: var(--gris);
+    color:black
     font-size: 1.6rem;
     font-weight: 900;
     text-transform: uppercase;
