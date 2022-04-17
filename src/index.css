@@ -300,7 +300,7 @@ main {
     margin: 0 0 0.3rem 0;
 }
 .descripcion-gasto .categoria {
-    color:black
+    color:black;
     font-size: 1.6rem;
     font-weight: 900;
     text-transform: uppercase;
@@ -392,14 +392,16 @@ body .modal {
 /*** SWIPE LIST OVERRIDES **/
 .swipe-action__leading {
     background-color: var(--azul);
-    color: var(--blanco);
+    color: white;
     margin-bottom: 2rem;
+    border-radius: 15px;
 }
 
 .swipe-action__trailing {
-    background-color: #db2777;
+    background-color: #f13c3c;
     margin-bottom: 2rem;
-    color: var(--blanco);
+    color: white;
+    border-radius: 15px;
 }
 
 .swipeable-list .swipe-action {

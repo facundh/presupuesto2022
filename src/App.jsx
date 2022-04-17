@@ -17,7 +17,6 @@ function App() {
     setModal(true);
 
     setTimeout(() => {
-      console.log("animando modal");
       setAnimarModal(true);
     }, 600);
   };
@@ -33,8 +32,9 @@ function App() {
   };
 
   return (
-    <div className={modal && 'fijar'}>
+    <div className={modal ? 'fijar' :''}>
       <Header
+        gastos={gastos}
         presupuesto={presupuesto}
         setPresupuesto={setPresupuesto}
         isValidPresupuesto={isValidPresupuesto}

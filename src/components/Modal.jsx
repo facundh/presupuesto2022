@@ -30,7 +30,6 @@ const Modal = ({ setModal, animarModal, setAnimarModal, agregarGasto }) => {
     setAnimarModal(false);
 
     setTimeout(() => {
-      console.log("cerrandomodal");
       setModal(false);
     }, 700);
   };
@@ -43,7 +42,7 @@ const Modal = ({ setModal, animarModal, setAnimarModal, agregarGasto }) => {
         <legend>Nuevo Gasto</legend>
         {mensaje && <Mensaje tipo='warnign'>{mensaje}</Mensaje>}
         <div className="campo">
-          <label htmlFor="">Nombre Gasto</label>
+          <label htmlFor="nombre">Nombre Gasto</label>
           <input
             id="nombre"
             type="text"
