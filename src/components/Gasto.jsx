@@ -27,13 +27,13 @@ const diccionarioIconos = {
   suscripciones: IconoSuscripciones,
 };
 
-const Gasto = ({ gasto }) => {
+const Gasto = ({ gasto, setEditarGasto }) => {
   const { nombre, cantidad, categoria, id, fecha } = gasto;
 
   const leadingActions = () => (
     <LeadingActions>
-      <SwipeAction onClick={() => console.info('swipe action triggered')}>
-        Editar
+      <SwipeAction onClick={() => setEditarGasto(gasto)}>
+          Editar
       </SwipeAction>
     </LeadingActions>
   );

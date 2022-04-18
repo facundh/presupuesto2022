@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Header from "./components/Header";
 import ListadoGastos from "./components/ListadoGastos";
 import Modal from "./components/Modal";
@@ -13,8 +13,21 @@ function App() {
   const [animarModal, setAnimarModal] = useState(false);
   const [gastos, setGastos] = useState([]);
 
+  const [editarGasto, setEditarGasto] = useState({});
+
+  useEffect(() => {
+    if (Object.keys(editarGasto).length > 0) {
+      setModal(true);
+
+      setTimeout(() => {
+        setAnimarModal(true);
+      }, 600);
+    }
+  }, [editarGasto]);
+
   const handleNuevoGasto = () => {
     setModal(true);
+    setEditarGasto({});
 
     setTimeout(() => {
       setAnimarModal(true);
@@ -22,9 +35,16 @@ function App() {
   };
 
   const agregarGasto = (gasto) => {
-    gasto.id = idGenerator();
-    gasto.fecha = Date.now();
-    setGastos([...gastos, gasto]);
+    if (gasto.id) {
+      const gastosActualizados = gastos.map((gastoState) =>
+        gastoState.id === gasto.id ? gasto : gastoState
+      );
+      setGastos(gastosActualizados);
+    } else {
+      gasto.id = idGenerator();
+      gasto.fecha = Date.now();
+      setGastos([...gastos, gasto]);
+    }
     setAnimarModal(false);
     setTimeout(() => {
       setModal(false);
@@ -32,7 +52,7 @@ function App() {
   };
 
   return (
-    <div className={modal ? 'fijar' :''}>
+    <div className={modal ? "fijar" : ""}>
       <Header
         gastos={gastos}
         presupuesto={presupuesto}
@@ -43,17 +63,17 @@ function App() {
 
       {isValidPresupuesto && (
         <>
-        <main>
-              <ListadoGastos  gastos={gastos}/>
-        </main>
-        
-        <div className="nuevo-gasto">
-          <img
-            src={IconoNuevoGasto}
-            alt="nuevo gasto"
-            onClick={handleNuevoGasto}
-          />
-        </div>
+          <main>
+            <ListadoGastos gastos={gastos} setEditarGasto={setEditarGasto} />
+          </main>
+
+          <div className="nuevo-gasto">
+            <img
+              src={IconoNuevoGasto}
+              alt="nuevo gasto"
+              onClick={handleNuevoGasto}
+            />
+          </div>
         </>
       )}
 
@@ -63,6 +83,8 @@ function App() {
           animarModal={animarModal}
           setAnimarModal={setAnimarModal}
           agregarGasto={agregarGasto}
+          setEditarGasto={setEditarGasto}
+          editarGasto={editarGasto}
         />
       )}
     </div>
