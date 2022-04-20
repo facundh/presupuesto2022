@@ -6,8 +6,9 @@ const Modal = ({
   setModal,
   animarModal,
   setAnimarModal,
-  agregarGasto,
+  gastoEditar,
   editarGasto,
+  setEditarGasto,
 }) => {
   const [mensaje, setMensaje] = useState("");
   const [nombre, setNombre] = useState("");
@@ -38,11 +39,12 @@ const Modal = ({
       return;
     }
 
-    agregarGasto({ nombre, cantidad, categoria,id, fecha });
+    gastoEditar({ nombre, cantidad, categoria, id, fecha });
   };
 
   const handleCerrarModal = () => {
     setAnimarModal(false);
+    setEditarGasto({})
 
     setTimeout(() => {
       setModal(false);

@@ -34,12 +34,13 @@ function App() {
     }, 600);
   };
 
-  const agregarGasto = (gasto) => {
+  const gastoEditar = (gasto) => {
     if (gasto.id) {
       const gastosActualizados = gastos.map((gastoState) =>
         gastoState.id === gasto.id ? gasto : gastoState
       );
       setGastos(gastosActualizados);
+      setEditarGasto({});
     } else {
       gasto.id = idGenerator();
       gasto.fecha = Date.now();
@@ -50,6 +51,11 @@ function App() {
       setModal(false);
     }, 700);
   };
+
+  const eliminarGasto = (id) => {
+    const gastoEliminado = gastos.filter(gasto => gasto.id !== id);
+    setGastos(gastoEliminado);
+  }
 
   return (
     <div className={modal ? "fijar" : ""}>
@@ -64,7 +70,7 @@ function App() {
       {isValidPresupuesto && (
         <>
           <main>
-            <ListadoGastos gastos={gastos} setEditarGasto={setEditarGasto} />
+            <ListadoGastos gastos={gastos} setEditarGasto={setEditarGasto} eliminarGasto={eliminarGasto}/>
           </main>
 
           <div className="nuevo-gasto">
@@ -82,7 +88,7 @@ function App() {
           setModal={setModal}
           animarModal={animarModal}
           setAnimarModal={setAnimarModal}
-          agregarGasto={agregarGasto}
+          gastoEditar={gastoEditar}
           setEditarGasto={setEditarGasto}
           editarGasto={editarGasto}
         />
